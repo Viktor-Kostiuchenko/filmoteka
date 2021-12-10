@@ -183,10 +183,6 @@
       width: 80px;
     }
 
-    @media screen and (min-width: $desktop) {
-      width: 100px;
-    }
-
     &::placeholder {
       color: $accent-color;
       opacity: 0.7;

@@ -3,10 +3,12 @@
   "version": "1.1.0",
   "description": "",
   "main": "index.js",
-  "homepage": "https://Dron010.github.io/filmoteka",
+  "homepage": "https://github.com/Viktor-Kostiuchenko/filmoteka",
   "scripts": {
     "dev": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /filmoteka/"
+    "build": "parcel build src/*.html --public-url /filmoteka/",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,7 @@
   "dependencies": {
     "axios": "^0.24.0",
     "debounce": "^1.2.1",
+    "gh-pages": "^3.2.3",
     "notiflix": "^3.2.2"
   }
 }
