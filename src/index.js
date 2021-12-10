@@ -26,6 +26,7 @@ import './js/layout/language';
 import './js/components/contacts';
 
 //=========components===============
+import './js/components/preloader'
 import './js/components/spiner.js';
 import './js/components/modal.js';
 import './js/components/notifications.js';

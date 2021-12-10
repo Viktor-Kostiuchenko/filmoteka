@@ -99,6 +99,9 @@ body.dark-theme {
       color: $secondary-text-color;
     }
   }
+  .header__logo-icon {
+    fill: none;
+  }
 }
 
 .theme-switch {
