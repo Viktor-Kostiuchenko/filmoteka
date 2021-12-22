@@ -12,7 +12,7 @@ function fetchVideo(id) {
 }
 modal.addEventListener('click', e => {
   if (e.target.dataset.modal === 'modal-video-btn') {
-    const id = e.path.find(num => num.className === 'modal__elements').dataset.id;
+    const id = e.target.closest('.modal__elements').dataset.id;
     openVideo(id);
   }
   return;

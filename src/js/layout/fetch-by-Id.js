@@ -35,8 +35,10 @@ function onCardClick(e) {
 
 //-----------getting an ID card------------------------
 function getId(e) {
-  const spreadArray = [...e.currentTarget.children]
-  return spreadArray.find(num => num.className === 'films__item').dataset.id;
+  if (e.target.nodeName === 'UL') {
+    return
+  }
+  return e.target.closest('.films__item').dataset.id;
 }
 //---------opening a modal window---------------------
 function openModalCard(filmId) {
