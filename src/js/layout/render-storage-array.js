@@ -4,7 +4,7 @@ import { getFromLocalStorage } from './local-storage';
 import { fetchById } from './fetch-by-Id';
 import { createInnerMarkup } from './render-by-template';
 
-const { queueBtn, watchedBtn, filmsEl, emptyListImg } = refs;
+const { queueBtn, watchedBtn, library, emptyListImg } = refs;
 
 queueBtn.addEventListener('click', renderFromStorageArray('queue'));
 watchedBtn.addEventListener('click', renderFromStorageArray('watched'));
@@ -13,7 +13,7 @@ export function renderFromStorageArray(keyName) {
   return function closureFunc() {
     if (!getFromLocalStorage(keyName) || getFromLocalStorage(keyName).length === 0) {
       emptyListImg.classList.remove('visually-hidden');
-      filmsEl.innerHTML = '';
+      library.innerHTML = '';
       return;
     }
 
@@ -26,7 +26,7 @@ export function renderFromStorageArray(keyName) {
       fetchById(film).then(result => {
         result.release_date = result.release_date.slice(0, 4);
         filmArray.push(result);
-        createInnerMarkup(filmsEl, cardTemplate(filmArray));
+        createInnerMarkup(library, cardTemplate(filmArray));
       }),
     );
   };

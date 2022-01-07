@@ -7,7 +7,7 @@ import { refs } from '../refs/refs.js';
 import { addToStorageArray } from './add-to-storage-array';
 import { openVideo } from '../components/video-player';
 
-const { filmsEl, modal, backdrop } = refs;
+const { filmsEl, modal, backdrop, library } = refs;
 
 // --------- func for search by ID -------------
 export function fetchById(id) {
@@ -16,6 +16,7 @@ export function fetchById(id) {
 }
 
 filmsEl.addEventListener('click', onCardClick);
+library.addEventListener('click', onCardClick);
 
 //---------click tracking function----------------
 function onCardClick(e) {

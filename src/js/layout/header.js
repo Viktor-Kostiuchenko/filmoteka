@@ -13,6 +13,8 @@ const {
   homeBtn,
   paginationList,
   emptyListImg,
+  library,
+  filmsEl
 } = refs;
 
 headerNav.addEventListener('click', changeHeader);
@@ -25,12 +27,16 @@ function changeHeader(e) {
       choseActiveEl(queueBtn, watchedBtn, 'header__item-btn--active');
       selectLibraryBtn();
       paginationList.classList.add('visually-hidden');
+      library.classList.remove('visually-hidden');
+      filmsEl.classList.add('visually-hidden');
       break;
     case 'home':
       selectHomeBtn();
       onFetchAllMovies(1);
       paginationList.classList.remove('visually-hidden');
       emptyListImg.classList.add('visually-hidden');
+      library.classList.add('visually-hidden');
+      filmsEl.classList.remove('visually-hidden');
       break;
   }
 }
