@@ -14,6 +14,7 @@ function onSearch(e) {
     return;
   }
   FetchByKeyword(keyword);
+  e.currentTarget.elements.query.value = ''
 }
 
 function FetchByKeyword(keyword) {

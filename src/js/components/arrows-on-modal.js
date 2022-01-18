@@ -4,6 +4,9 @@ import { createInnerMarkup } from '../layout/render-by-template';
 import { openVideo } from './video-player';
 import { addToStorageArray } from '../layout/add-to-storage-array';
 import makeModalFilm from '../../partial/templates/modal-film.hbs';
+import { changeModalLanguage } from '../layout/language';
+
+
 
 const { backdrop, modal} = refs;
 
@@ -24,13 +27,16 @@ function onModalBtnsClick(e) {
         
         if (e.target.classList.contains('js-modal-next-btn')) {
           fetchById(nextFilmId).then(result => {
+
             createInnerMarkup(modal, makeModalFilm(result))
+            changeModalLanguage()
             document.querySelector('[data-modal="modal-video-btn"]').addEventListener('click', () => openVideo(nextFilmId))
             document.querySelector('[data-watched]').addEventListener('click', addToStorageArray('watched', 'watched'));
         })
       } if (e.target.classList.contains('js-modal-prev-btn')) {
           fetchById(previousFilmId).then(result => {
             createInnerMarkup(modal, makeModalFilm(result))
+            changeModalLanguage()
             document.querySelector('[data-modal="modal-video-btn"]').addEventListener('click', () => openVideo(previousFilmId))
             document.querySelector('[data-watched]').addEventListener('click', addToStorageArray('watched', 'watched'));
         })

@@ -18,28 +18,30 @@ export function addToStorageArray(keyName, property) {
       }
       const id = e.target.dataset.id;
       const lang = getFromLocalStorage('lang')
+      console.log(id)
 
       switch (!localStorage.getItem(keyName)) {
         case true:
           const contentToAdd = [];
           contentToAdd.push(id);
+          console.log(e.target)
           
           if (lang === 'uk') {
             if(keyName === 'watched') {
-              e.currentTarget.textContent = `видалити з переглянутих`
+              e.target.textContent = `видалити з переглянутих`
             } else {
-              e.currentTarget.textContent = `видалити з черги`
+              e.target.textContent = `видалити з черги`
             }
           }
           if (lang === 'ru') {
             if(keyName === 'watched') {
-              e.currentTarget.textContent = `удалить из просмотренных`
+              e.target.textContent = `удалить из просмотренных`
             } else {
-              e.currentTarget.textContent = `удалить из очереди`
+              e.target.textContent = `удалить из очереди`
             }
           }
           if (lang === 'en') {
-            e.currentTarget.textContent = `delete from ${keyName}`
+            e.target.textContent = `delete from ${keyName}`
           }
 
           showNotify('success', 'Added to List');
@@ -51,6 +53,7 @@ export function addToStorageArray(keyName, property) {
 
 
         case false:
+          
           const storageArray = getFromLocalStorage(keyName);
           if (storageArray.includes(id)) {
             const index = storageArray.indexOf(id)
@@ -70,20 +73,22 @@ export function addToStorageArray(keyName, property) {
 
               if (lang === 'uk') {
                 if(keyName === 'watched') {
-                  e.currentTarget.textContent = `переглянуто`
+
+                  e.target.textContent = `переглянуто`
                 } else {
-                  e.currentTarget.textContent = `в чергу`
+                  e.target.textContent = `в чергу`
                 }
               }
               if (lang === 'ru') {
                 if(keyName === 'watched') {
-                  e.currentTarget.textContent = `просмотренные`
+                  e.target.textContent = `просмотренные`
                 } else {
-                  e.currentTarget.textContent = `в очередь`
+                  e.target.textContent = `в очередь`
                 }
               }
               if (lang === 'en') {
-                e.currentTarget.textContent = `add to ${keyName}`
+
+                e.target.textContent = `add to ${keyName}`
               }
               showNotify('warning', 'deleted')
               setToLocalStorage(`${keyName}`, storageArray);
@@ -93,20 +98,20 @@ export function addToStorageArray(keyName, property) {
             storageArray.push(id);
             if (lang === 'uk') {
               if(keyName === 'watched') {
-                e.currentTarget.textContent = `видалити з переглянутих`
+                e.target.textContent = `видалити з переглянутих`
               } else {
-                e.currentTarget.textContent = `видалити з черги`
+                e.target.textContent = `видалити з черги`
               }
             }
             if (lang === 'ru') {
               if(keyName === 'watched') {
-                e.currentTarget.textContent = `удалить из просмотренных`
+                e.target.textContent = `удалить из просмотренных`
               } else {
-                e.currentTarget.textContent = `удалить из очереди`
+                e.target.textContent = `удалить из очереди`
               }
             }
             if (lang === 'en') {
-              e.currentTarget.textContent = `delete from ${keyName}`
+              e.target.textContent = `delete from ${keyName}`
             }
             showNotify('success', 'Added to List');
             setToLocalStorage(`${keyName}`, storageArray);

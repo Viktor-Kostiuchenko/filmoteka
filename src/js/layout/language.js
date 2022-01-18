@@ -1,22 +1,34 @@
 import { refs } from '../refs/refs';
 import { setToLocalStorage, getFromLocalStorage} from './local-storage';
-import { returnToMain } from '../layout/header'
 import { setGenresToLocalStorage } from './genre-local-storage';
-
 import headerLng from '../../data/header.json'
 import mainLng from '../../data/main.json'
+import { renderFromStorageArray } from './render-storage-array';
+import { onFetchAllMovies } from './week-movies';
 
-const { select } = refs;
+const { select, filmsEl, queueBtn, watchedBtn } = refs;
 
 select.addEventListener('change', changeLanguage);
 
 export function changeLanguage() {
+  const isFilms = !filmsEl.classList.contains('visually-hidden')
+  const isQueue = queueBtn.classList.contains('header__item-btn--active')
+  const isWatched = watchedBtn.classList.contains('header__item-btn--active')
+
   let lang = select.value;
   setToLocalStorage('lang', lang)
 
   setHeaderData(lang)
   setGenresToLocalStorage()
-  returnToMain()
+
+  if(isFilms) {
+    onFetchAllMovies(1)
+  } else if(isQueue) {
+    renderFromStorageArray('queue')
+  } else if(isWatched) {
+    renderFromStorageArray('watched')
+  }
+
 }
 
 let langLS = getFromLocalStorage('lang')

@@ -19,13 +19,13 @@ const {
 
 headerNav.addEventListener('click', changeHeader);
 headerBtn.addEventListener('click', changeActiveHeaderBtn);
-libraryBtn.addEventListener('click', renderFromStorageArray('queue'));
 
 function changeHeader(e) {
   switch (e.srcElement.dataset.action) {
     case 'library':
       choseActiveEl(queueBtn, watchedBtn, 'header__item-btn--active');
       selectLibraryBtn();
+      renderFromStorageArray('queue')
       paginationList.classList.add('visually-hidden');
       library.classList.remove('visually-hidden');
       filmsEl.classList.add('visually-hidden');
@@ -39,12 +39,6 @@ function changeHeader(e) {
       filmsEl.classList.remove('visually-hidden');
       break;
   }
-}
-
-export function returnToMain() {
-  selectHomeBtn();
-  onFetchAllMovies(1);
-  paginationList.classList.add('visually-hidden');
 }
 
 function changeActiveHeaderBtn(e) {

@@ -6,11 +6,10 @@ import { createInnerMarkup } from './render-by-template';
 
 const { queueBtn, watchedBtn, library, emptyListImg } = refs;
 
-queueBtn.addEventListener('click', renderFromStorageArray('queue'));
-watchedBtn.addEventListener('click', renderFromStorageArray('watched'));
+queueBtn.addEventListener('click', e=> {renderFromStorageArray('queue')});
+watchedBtn.addEventListener('click', e=>{renderFromStorageArray('watched')} );
 
 export function renderFromStorageArray(keyName) {
-  return function closureFunc() {
     if (!getFromLocalStorage(keyName) || getFromLocalStorage(keyName).length === 0) {
       emptyListImg.classList.remove('visually-hidden');
       library.innerHTML = '';
@@ -29,5 +28,5 @@ export function renderFromStorageArray(keyName) {
         createInnerMarkup(library, cardTemplate(filmArray));
       }),
     );
-  };
 }
+
