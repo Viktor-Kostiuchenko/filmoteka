@@ -50,11 +50,14 @@ function openModalCard(filmId) {
     const modalContent = makeModalFilm(result);
     createInnerMarkup(modal, modalContent);
 
+    const queue = getFromLocalStorage('queue')
+    const watched = getFromLocalStorage('watched')
     const lang = getFromLocalStorage('lang')
-    const inQueue = getFromLocalStorage('queue')?.find(el => el === filmId)
-    const inWatched = getFromLocalStorage('watched')?.find(el => el === filmId)
     const addToQueueBtn = document.querySelector('[data-queue]');
     const addToWatchedBtn = document.querySelector('[data-watched]');
+
+    const inQueue = queue?.find(el => el === filmId)
+    const inWatched = watched?.find(el => el === filmId)
 
 
     openModalWindow(backdrop);
