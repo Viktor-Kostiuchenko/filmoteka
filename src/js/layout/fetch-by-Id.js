@@ -6,6 +6,8 @@ import { openModalWindow } from '../components/modal.js';
 import { refs } from '../refs/refs.js';
 import { addToStorageArray } from './add-to-storage-array';
 import { openVideo } from '../components/video-player';
+import { getFromLocalStorage } from './local-storage.js';
+
 
 const { filmsEl, modal, backdrop, library } = refs;
 
@@ -46,16 +48,50 @@ function openModalCard(filmId) {
   fetchById(filmId).then(result => {
     result.popularity = result.popularity.toFixed(2);
     const modalContent = makeModalFilm(result);
-
     createInnerMarkup(modal, modalContent);
-    openModalWindow(backdrop);
 
+    const lang = getFromLocalStorage('lang')
+    const inQueue = getFromLocalStorage('queue').find(el => el === filmId)
+    const inWatched = getFromLocalStorage('watched').find(el => el === filmId)
     const addToQueueBtn = document.querySelector('[data-queue]');
-    addToQueueBtn.addEventListener('click', addToStorageArray('queue', 'queue'));
-
     const addToWatchedBtn = document.querySelector('[data-watched]');
+
+    openModalWindow(backdrop);
+    changeModalLanguage();
+
+    if(inQueue) {
+      switch (lang) {
+        case 'uk':
+          addToQueueBtn.textContent = `видалити з черги`
+          break;
+        case 'ru':
+          addToQueueBtn.textContent = `удалить из очереди`
+          break;
+        case 'en':
+          addToQueueBtn.textContent = `delete from queue`
+          break;
+        default:
+          break;
+      }
+    }
+    if(inWatched) {
+      switch (lang) {
+        case 'uk':
+          addToWatchedBtn.textContent = `видалити з переглянутих`
+          break;
+        case 'ru':
+          addToWatchedBtn.textContent = `удалить из просмотренных`
+          break;
+        case 'en':
+          addToWatchedBtn.textContent = `delete from watched`
+          break;
+        default:
+          break;
+      }
+    }
+
+    addToQueueBtn.addEventListener('click', addToStorageArray('queue', 'queue'));
     addToWatchedBtn.addEventListener('click', addToStorageArray('watched', 'watched'));
 
-    changeModalLanguage();
   });
 }
