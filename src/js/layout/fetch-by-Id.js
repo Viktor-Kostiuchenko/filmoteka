@@ -64,7 +64,7 @@ function openModalCard(filmId) {
   });
 }
 
-function setTxtToQueueBtn(btn, filmId) {
+export function setTxtToQueueBtn(btn, filmId) {
   const queue = getFromLocalStorage('queue')
   const lang = getFromLocalStorage('lang')
   let inQueue = false
@@ -88,7 +88,7 @@ function setTxtToQueueBtn(btn, filmId) {
   }
 }
 
-function setTxtToWatchedBtn(btn, filmId) {
+export function setTxtToWatchedBtn(btn, filmId) {
   const watched = getFromLocalStorage('watched')
   const lang = getFromLocalStorage('lang')
   let inWatched = false

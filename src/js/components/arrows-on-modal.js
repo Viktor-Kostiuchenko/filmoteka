@@ -4,6 +4,7 @@ import { createInnerMarkup } from '../layout/render-by-template';
 import { openVideo } from './video-player';
 import { addToStorageArray } from '../layout/add-to-storage-array';
 import makeModalFilm from '../../partial/templates/modal-film.hbs';
+import { setTxtToQueueBtn, setTxtToWatchedBtn } from '../layout/fetch-by-Id';
 import { changeModalLanguage } from '../layout/language';
 
 
@@ -31,14 +32,26 @@ function onModalBtnsClick(e) {
             createInnerMarkup(modal, makeModalFilm(result))
             changeModalLanguage()
             document.querySelector('[data-modal="modal-video-btn"]').addEventListener('click', () => openVideo(nextFilmId))
-            document.querySelector('[data-watched]').addEventListener('click', addToStorageArray('watched', 'watched'));
+
+            const addToQueueBtn = document.querySelector('[data-queue]');
+            const addToWatchedBtn = document.querySelector('[data-watched]');
+            addToQueueBtn.addEventListener('click', addToStorageArray('queue', 'queue'));
+            addToWatchedBtn.addEventListener('click', addToStorageArray('watched', 'watched'));
+            setTxtToQueueBtn(addToQueueBtn, nextFilmId)
+            setTxtToWatchedBtn(addToWatchedBtn, nextFilmId)
         })
       } if (e.target.classList.contains('js-modal-prev-btn')) {
           fetchById(previousFilmId).then(result => {
             createInnerMarkup(modal, makeModalFilm(result))
             changeModalLanguage()
             document.querySelector('[data-modal="modal-video-btn"]').addEventListener('click', () => openVideo(previousFilmId))
-            document.querySelector('[data-watched]').addEventListener('click', addToStorageArray('watched', 'watched'));
+
+            const addToQueueBtn = document.querySelector('[data-queue]');
+            const addToWatchedBtn = document.querySelector('[data-watched]');
+            addToQueueBtn.addEventListener('click', addToStorageArray('queue', 'queue'));
+            addToWatchedBtn.addEventListener('click', addToStorageArray('watched', 'watched'));
+            setTxtToQueueBtn(addToQueueBtn, previousFilmId)
+            setTxtToWatchedBtn(addToWatchedBtn, previousFilmId)
         })
       }  
     }
