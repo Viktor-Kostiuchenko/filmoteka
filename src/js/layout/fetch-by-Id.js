@@ -51,10 +51,11 @@ function openModalCard(filmId) {
     createInnerMarkup(modal, modalContent);
 
     const lang = getFromLocalStorage('lang')
-    const inQueue = getFromLocalStorage('queue').find(el => el === filmId)
-    const inWatched = getFromLocalStorage('watched').find(el => el === filmId)
+    const inQueue = getFromLocalStorage('queue')?.find(el => el === filmId)
+    const inWatched = getFromLocalStorage('watched')?.find(el => el === filmId)
     const addToQueueBtn = document.querySelector('[data-queue]');
     const addToWatchedBtn = document.querySelector('[data-watched]');
+
 
     openModalWindow(backdrop);
     changeModalLanguage();
