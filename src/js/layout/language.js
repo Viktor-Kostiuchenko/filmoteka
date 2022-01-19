@@ -8,8 +8,12 @@ import { onFetchAllMovies } from './week-movies';
 
 const { select, filmsEl, queueBtn, watchedBtn } = refs;
 
-select.addEventListener('change', changeLanguage);
+const initLang = getFromLocalStorage('lang')
+if(!initLang) {
+  setToLocalStorage('lang', 'en');
+}
 
+select.addEventListener('change', changeLanguage);
 export function changeLanguage() {
   const isFilms = !filmsEl.classList.contains('visually-hidden')
   const isQueue = queueBtn.classList.contains('header__item-btn--active')

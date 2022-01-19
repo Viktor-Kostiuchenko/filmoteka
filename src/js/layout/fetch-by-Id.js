@@ -6,7 +6,7 @@ import { openModalWindow } from '../components/modal.js';
 import { refs } from '../refs/refs.js';
 import { addToStorageArray } from './add-to-storage-array';
 import { openVideo } from '../components/video-player';
-import { getFromLocalStorage } from './local-storage.js';
+import { getFromLocalStorage, setToLocalStorage } from './local-storage.js';
 
 
 const { filmsEl, modal, backdrop, library } = refs;
@@ -50,52 +50,64 @@ function openModalCard(filmId) {
     const modalContent = makeModalFilm(result);
     createInnerMarkup(modal, modalContent);
 
-    const queue = getFromLocalStorage('queue')
-    const watched = getFromLocalStorage('watched')
-    const lang = getFromLocalStorage('lang')
     const addToQueueBtn = document.querySelector('[data-queue]');
     const addToWatchedBtn = document.querySelector('[data-watched]');
-
-    const inQueue = queue?.find(el => el === filmId)
-    const inWatched = watched?.find(el => el === filmId)
-
+    addToQueueBtn.addEventListener('click', addToStorageArray('queue', 'queue'));
+    addToWatchedBtn.addEventListener('click', addToStorageArray('watched', 'watched'));
 
     openModalWindow(backdrop);
     changeModalLanguage();
 
-    if(inQueue) {
-      switch (lang) {
-        case 'uk':
-          addToQueueBtn.textContent = `видалити з черги`
-          break;
-        case 'ru':
-          addToQueueBtn.textContent = `удалить из очереди`
-          break;
-        case 'en':
-          addToQueueBtn.textContent = `delete from queue`
-          break;
-        default:
-          break;
-      }
-    }
-    if(inWatched) {
-      switch (lang) {
-        case 'uk':
-          addToWatchedBtn.textContent = `видалити з переглянутих`
-          break;
-        case 'ru':
-          addToWatchedBtn.textContent = `удалить из просмотренных`
-          break;
-        case 'en':
-          addToWatchedBtn.textContent = `delete from watched`
-          break;
-        default:
-          break;
-      }
-    }
-
-    addToQueueBtn.addEventListener('click', addToStorageArray('queue', 'queue'));
-    addToWatchedBtn.addEventListener('click', addToStorageArray('watched', 'watched'));
+    setTxtToQueueBtn(addToQueueBtn, filmId)
+    setTxtToWatchedBtn(addToWatchedBtn, filmId)
 
   });
+}
+
+function setTxtToQueueBtn(btn, filmId) {
+  const queue = getFromLocalStorage('queue')
+  const lang = getFromLocalStorage('lang')
+  let inQueue = false
+  if(queue) {
+    inQueue = queue.some(el => el === filmId)
+  }
+  if(inQueue) {
+    switch (lang) {
+      case 'uk':
+        btn.textContent = `видалити з черги`
+        break;
+      case 'ru':
+        btn.textContent = `удалить из очереди`
+        break;
+      case 'en':
+        btn.textContent = `delete from queue`
+        break;
+      default:
+        break;
+    }
+  }
+}
+
+function setTxtToWatchedBtn(btn, filmId) {
+  const watched = getFromLocalStorage('watched')
+  const lang = getFromLocalStorage('lang')
+  let inWatched = false
+  if (watched) {
+    inWatched = watched.some(el => el === filmId)
+  }
+  if(inWatched) {
+    switch (lang) {
+      case 'uk':
+        btn.textContent = `видалити з переглянутих`
+        break;
+      case 'ru':
+        btn.textContent = `удалить из просмотренных`
+        break;
+      case 'en':
+        btn.textContent = `delete from watched`
+        break;
+      default:
+        break;
+    }
+  }
 }
