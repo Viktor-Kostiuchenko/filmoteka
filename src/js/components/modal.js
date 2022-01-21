@@ -19,6 +19,7 @@ export function openModalWindow(e) {
 
 function openModal(backdrop, btnClose) {
   backdrop.classList.remove('visually-hidden');
+  closeBtnVideoPlayer.classList.remove('visually-hidden');
   btnClose.addEventListener('click', closeModalWindow);
   backdrop.addEventListener('click', closeToBackdrop);
    document.querySelector('.modal__btns-list').classList.remove('visually-hidden') 
@@ -32,6 +33,7 @@ function openModal(backdrop, btnClose) {
 function closeModalWindow() {
   if (!backdropVideoPlayer.classList.contains('visually-hidden')) {
     backdropVideoPlayer.classList.add('visually-hidden');
+    closeBtnVideoPlayer.classList.add('visually-hidden');
     closeBtnVideoPlayer.removeEventListener('click', closeModalWindow);
     backdropVideoPlayer.removeEventListener('click', closeToBackdrop);
     cleanInnerMarkup(containerVideoPlayer);
