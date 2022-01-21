@@ -19,7 +19,7 @@ export function openModalWindow(e) {
 
 function openModal(backdrop, btnClose) {
   backdrop.classList.remove('visually-hidden');
-  closeBtnVideoPlayer.classList.remove('visually-hidden');
+  btnClose.classList.remove('visually-hidden');
   btnClose.addEventListener('click', closeModalWindow);
   backdrop.addEventListener('click', closeToBackdrop);
    document.querySelector('.modal__btns-list').classList.remove('visually-hidden') 
